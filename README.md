@@ -209,9 +209,120 @@ The server will notify other users.
 
 # Testing
 
-The application was tested under the following scenarios:
+The application was tested under the following scenarios: Server running with three clients
 
-### Multiple Clients
+### Server
+```
+jk@tp:~/sem6/CN/chat-app$ python3 server/server.py 
+host: tp
+ip: 127.0.1.1
+port: 12345
+server waiting for clients...
+got conn from ('127.0.0.1', 49138)
+Jittu joined chat.
+got conn from ('127.0.0.1', 44402)
+satyam joined chat.
+got conn from ('127.0.0.1', 33126)
+sanjay joined chat.
+[22:33:18] Jittu: Hii how are you al?👋
+[22:33:42] satyam: I am doing great, thank you for asking!
+[22:33:43] satyam: 😊
+[22:34:08] sanjay: Glay to see you all 😄
+sanjay left chat.
+satyam left chat.
+[22:38:48] Jittu: /usrs
+[22:39:02] Jittu: it seems everyone left
+[22:39:17] Jittu: ok, I am leaving the text.
+Jittu left chat.
+```
+
+### Clinet 1 (Sanjay):
+```
+jk@tp:~/sem6/CN/chat-app$ python3 client/client.py 
+type server ip: 127.0.1.1
+ur name: sanjay
+sanjay joined chat.
+[22:33:18] Jittu: Hii how are you al?👋
+[22:33:42] satyam: I am doing great, thank you for asking!
+[22:33:43] satyam: 😊
+Glay to see you all 😄
+/history
+[22:33:18] Jittu: Hii how are you al?👋
+[22:33:42] satyam: I am doing great, thank you for asking!
+[22:33:43] satyam: 😊
+[22:34:08] sanjay: Glay to see you all 😄
+/users
+Online users: Jittu, satyam, sanjay
+/quit
+server gone or smth
+jk@tp:~/sem6/CN/chat-app$ 
+```
+
+### Clinet 2 (Satyam):
+```
+jk@tp:~/sem6/CN/chat-app$ python3 client/client.py 
+type server ip: 127.0.1.1
+ur name: satyam
+satyam joined chat.
+sanjay joined chat.
+[22:33:18] Jittu: Hii how are you al?👋
+I am doing great, thank you for asking!
+😊
+[22:34:08] sanjay: Glay to see you all 😄
+sanjay left chat.
+/users
+Online users: Jittu, satyam
+/history
+[22:33:18] Jittu: Hii how are you al?👋
+[22:33:42] satyam: I am doing great, thank you for asking!
+[22:33:43] satyam: 😊
+[22:34:08] sanjay: Glay to see you all 😄
+/quit
+server gone or smth
+jk@tp:~/sem6/CN/chat-app$ 
+```
+
+### Clinet 3 (Jittu):
+```
+jk@tp:~/sem6/CN/chat-app$ python3 client/client.py 
+type server ip: 127.0.1.1
+ur name: Jittu
+Jittu joined chat.
+satyam joined chat.
+sanjay joined chat.
+Hii how are you all?👋          
+[22:33:42] satyam: I am doing great, thank you for asking!
+[22:33:43] satyam: 😊
+[22:34:08] sanjay: Glay to see you all 😄
+sanjay left chat.
+satyam left chat.
+/usrs           
+/users
+Online users: Jittu
+it seems everyone left
+ok, I am leaving the text.
+/quit
+server gone or smth
+jk@tp:~/sem6/CN/chat-app$ 
+```
+
+### Audit Event captured logs:
+```
+[2026-03-09 22:31:46] Jittu joined
+[2026-03-09 22:32:10] satyam joined
+[2026-03-09 22:32:24] sanjay joined
+[2026-03-09 22:33:18] Jittu msg: Hii how are you al?👋
+[2026-03-09 22:33:42] satyam msg: I am doing great, thank you for asking!
+[2026-03-09 22:33:43] satyam msg: 😊
+[2026-03-09 22:34:08] sanjay msg: Glay to see you all 😄
+[2026-03-09 22:37:02] sanjay quit
+[2026-03-09 22:38:23] satyam quit
+[2026-03-09 22:38:48] Jittu msg: /usrs
+[2026-03-09 22:39:02] Jittu msg: it seems everyone left
+[2026-03-09 22:39:17] Jittu msg: ok, I am leaving the text.
+[2026-03-09 22:39:20] Jittu quit
+
+```
 
 Multiple clients connected simultaneously and exchanged messages successfully.
 
