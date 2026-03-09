@@ -46,8 +46,8 @@ def sendmsgs():
         elif m.strip() != "":
             s.send(("MSG " + m).encode())
 
-# make threads for both
-t1 = threading.Thread(target=getmsgs)
-t1.start()
-t2 = threading.Thread(target=sendmsgs)
-t2.start()
+if __name__ == "__main__":
+    t1 = threading.Thread(target=getmsgs)
+    t1.start()
+    t2 = threading.Thread(target=sendmsgs)
+    t2.start()
