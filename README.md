@@ -83,10 +83,8 @@ Server broadcast:
 
 # Technologies Used
 
-- Python 3
+- Python
 - TCP Sockets
-- Multithreading
-- Standard Python libraries only
 
 Libraries used:
 
@@ -120,15 +118,9 @@ The **server acts as a central hub**, managing communication between all connect
 
 # Concurrency Model
 
-The server uses **multi-threading**.
+The server uses **multi-threading** for sending and getting msgs.
 
 Each client connection runs in a **separate thread**, allowing the server to handle multiple clients simultaneously.
-
-Example:
-
-```python
-threading.Thread(target=handle, args=(client_socket,))
-```
 
 This ensures that communication with one client does not block others.
 
@@ -195,6 +187,22 @@ Type:
 /quit
 ```
 
+## 5. See active users
+
+Type:
+
+```
+/users
+```
+
+## 6. See history
+
+Type:
+
+```
+/history
+```
+
 The server will notify other users.
 
 ---
@@ -223,7 +231,7 @@ Users can request previous messages using the `HISTORY` command.
 
 # Logging
 
-All events are logged in:
+All events are stored in a text file.
 
 ```
 audit_event.txt
